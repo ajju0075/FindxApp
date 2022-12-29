@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% load static %}
+<!--  -->
+{% block content %}
+
+<section style="background-color: #eee">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-6 col-lg-7 col-xl-8">
+        <div class="overflow-auto p-3 bg-light" style="max-width: 600vw; max-height: 50vh">
+          <ul class="list-unstyled">
+            {% for message in messages %}
+            <!-- message  -->
+            {% if message.send_to == user %}
+            <li class="d-flex justify-content-between mb-4">
+              <img src="{{message.host.profilemodel.photo.url}}" alt="avatar"
+                class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60px" height="60px" />
+              <div class="card">
+                <div class="card-header d-flex justify-content-between p-3">
+                  <p class="fw-bold mb-0">{{message.host}}</p>
+                  <p class="text-muted small mb-0">
+                    <i class="far fa-clock"></i> {{message.updated_on|date}}
+                  </p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0">{{message.message}}</p>
+                </div>
+              </div>
+            </li>
+            {% else %}
+            <li class="d-flex justify-content-between mb-4">
+              <div class="card w-100">
+                <div class="card-header d-flex justify-content-between p-3">
+                  <p class="fw-bold mb-0">{{message.host}}</p>
+                  <p class="text-muted small mb-0">
+                    <i class="far fa-clock"></i> {{message.updated_on|date}}
+                  </p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0">{{message.message}}</p>
+                </div>
+              </div>
+              <img src="{{message.host.profilemodel.photo.url}}" alt="avatar"
+                class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60px" height="60px" />
+            </li>
+            {% endif %}
+            <!--  -->
+            {% empty %}
+            <li>No Message</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div>
+          <form action="{% url 'chat:send_message' send_to.id  %}" method="post">
+            {% csrf_token %}
+            <li class="bg-white mb-3">
+              <div class="form-outline">
+                <textarea class="form-control" id="textAreaExample2" rows="4" name="message"></textarea>
+                <input type="hidden" name="send_to" value="{{send_to.id}}" />
+                <input type="hidden" name="host" value="{{user.id}}" />
+                <label class="form-label" for="textAreaExample2">Message</label>
+              </div>
+            </li>
+            <button type="submit" class="btn btn-info btn-rounded float-end">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

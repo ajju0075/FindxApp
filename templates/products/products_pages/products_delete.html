@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <a href="{% url 'products:products_in_profile' %}" class="btn btn-primary my-3">Go Back</a>
+
+        <h1 class="d-flex justify-content-center mb-5">Delete Post</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+
+            <div class="row">
+
+                <div class="d-flex justify-content-center mb-5">
+                    <div class="col-md-4">
+                        <div class="card my-2">
+
+                            <div class="card-body">
+
+                                <p>Are you sure you want to delete your post named "{{products.product_name}}"</p>
+                            </div>
+                            <input class="btn btn-outline-danger btn-sm m-1" type="submit" value="Delete" />
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+    </div>
+    </form>
+</section>
+
+
+
+{% endblock %}

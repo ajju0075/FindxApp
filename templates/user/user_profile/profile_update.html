@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+<!--  -->
+{% block content %}
+<!-- header -->
+<section class="vh-100 gradient-custom">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <!-- <a href="#" class="btn btn-dark my-3">Go Back</a> -->
+
+        <div class="card">
+          <div class="row justify-content-center">
+            <h1 class="row justify-content-center">Edit profile</h1>
+          </div>
+
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div>
+              <div class="d-flex justify-content-center">
+
+                <img id="profile_image_id" class="rounded-circle" width="140" height="140"
+                  style="object-fit: cover; border: 2px solid rgb(44, 66, 189)" src="{{user.profilemodel.photo.url}}" />
+              </div><br>
+              <div class="d-flex justify-content-center">
+                <div class="btn btn-primary btn-rounded">
+                  <label class="form-label text-white m-1" for="customFile2">Choose file</label>
+                  <input type="file" name="photo" class="form-control d-none" value="{{form.instance.photo.url}}"
+                    id="customFile2" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group m-3">
+              <label>First name</label>
+              <input required name="first_name" type="text" value="{{form.instance.first_name}}"
+                placeholder="Enter first name" class="form-control" />
+            </div>
+
+            <div class="form-group m-3">
+              <label>Last name</label>
+              <input required value="{{form.instance.last_name}}" name="last_name" type="text"
+                placeholder="Enter last name" class="form-control" />
+            </div>
+
+            <div class="form-group m-3">
+              <label>Phone</label>
+              <input value="{{form.instance.phone}}" name="phone" type="text" placeholder="Enter your phone"
+                class="form-control" />
+            </div>
+
+            <div class="form-group m-3">
+              <label>location</label>
+              <input name="location" value="{{form.instance.location}}" type="text" placeholder="Enter your location"
+                class="form-control" />
+            </div>
+
+            <!-- <div class="form-group m-3">
+                                <label>Upload image</label>
+                                <input required name="image" type="file" class="form-control-file">
+                            </div> -->
+
+            <button type="submit" class="btn btn-primary m-3">save</button>
+          </form>
+          <a type="submit" href="{% url 'user:profile_detail' user.profilemodel.id %}" class="btn btn-primary m-3">Go
+            back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

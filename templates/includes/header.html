@@ -1,0 +1,216 @@
+{% load static %}
+<!--Main Navigation-->
+<header>
+  <!-- Jumbotron -->
+  <div class="p-3 text-center bg-white border-bottom">
+    <div class="container">
+      <div class="row">
+        <!-- Left elements -->
+        <div class="col-md-4 d-flex justify-content-center justify-content-md-start mb-3 mb-md-0">
+
+
+          <!-- after login content  -->
+          <div class="dropdown">
+            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+              role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+              <img src="{% static 'images\hamburger.png' %}" class="rounded-circle" height="40"
+                alt="Black and White Portrait of a Man" loading="lazy" />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+
+              {% if user.is_authenticated %}
+              <li>
+                <a class="dropdown-item" href="{% url 'chat:chat_list' %}">Chats</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'products:product_list' %}">Buy</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'products:post_pyment' %}">Sell</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'core:contactus' %}">contactus</a>
+              </li>
+
+
+              <li>
+                <a class="dropdown-item" href="{% url 'user:logout' %}">Logout</a>
+              </li>
+              {% else %}
+
+              <li>
+                <a class="dropdown-item" href="{% url 'user:login' %}">Login</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'products:product_list' %}">Buy</a>
+              </li>
+
+
+
+              <li>
+                <a class="dropdown-item" href="{% url 'core:contactus' %}">contactus</a>
+              </li>
+
+              {% endif %}
+
+            </ul>
+          </div>
+          <div class="dropdown" id="profile-area">
+            <a href="{% url 'core:home' %}" class="ms-md-2">
+              {% load static %} <img src="{% static 'images/Findx-logo.png' %}" height="40" />
+            </a>
+          </div>
+
+
+          <!-- location api needed for this comented item  -->
+
+
+
+          <!-- <form class="d-flex align-items-center w-100 form-search">
+            <div class="input-group">
+              <button class="btn btn-light dropdown-toggle shadow-0" type="button" data-mdb-toggle="dropdown"
+                aria-expanded="false" style="padding-bottom: 0.4rem;">
+                India
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark fa-ul">
+                <li>
+                  <a class="dropdown-item" href="#"><span class="fa-li pe-2"><i
+                        class="fas fa-search"></i></span>India</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"><span class="fa-li pe-2"></span>Kerala</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"><span class="fa-li pe-2"></span>Karnataka</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"><span class="fa-li pe-2"></span>Bangalur</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"><span class="fa-li pe-2"></span>Delhi</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"><span class="fa-li pe-2"></span>Punjab</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"><span class="fa-li pe-2"></span>Advanced
+                    search<i class="fas fa-chevron-right ps-2"></i></a>
+                </li>
+              </ul>
+              <input type="search" class="form-control" placeholder="location" aria-label="Search" />
+            </div>
+            <a href="#!" class="text-white"><i class="fas fa-search ps-3"></i></a>
+          </form> -->
+
+
+        </div>
+
+
+        <div class="col-md-4">
+          {% include "products/catogory/search_list.html" %}
+
+
+          <!-- <form class="d-flex input-group w-auto my-auto mb-3 mb-md-0">
+            <input autocomplete="off" type="search" class="form-control rounded" placeholder="Search" />
+            <span class="input-group-text border-0 d-none d-lg-flex"><i class="fas fa-search"></i></span>
+          </form> -->
+        </div>
+        <!-- Center elements -->
+
+
+
+        <div class="col-md-4 d-flex justify-content-center justify-content-md-end align-items-center">
+          {% if user.is_authenticated %}
+
+
+          <div class="d-flex align-items-center w-100 ">
+            <a class="nav-link" href="{% url 'products:post_pyment' %}" role="link" aria-expanded="false">
+              <img class="rounded-circle" width="40" height="40" src="{% static 'images\post-btn.png' %}" />
+
+            </a>
+
+          </div>
+
+
+          <div class="dropdown" id="profile-area">
+            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+              role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+              <img id="profile_image_id" class="rounded-circle" width="40" height="40"
+                style="object-fit: cover; border: 1px solid rgb(198, 192, 192)" src="{{user.profilemodel.photo.url}}" />
+
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+              <li>
+                {% if user.profilemodel %}
+                <a class="dropdown-item" href="{% url 'user:profile_detail' user.profilemodel.id %}">My profile</a>
+                <a class="dropdown-item" href="{% url 'products:products_in_profile' %}">My Adds</a>
+                {% else %}
+                <a class="dropdown-item" href="{% url 'user:profile_create' %}">Set up profile</a>
+                {% endif %}
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'user:logout' %}">Logout</a>
+              </li>
+            </ul>
+          </div>
+          {% else %}
+
+
+          <a href="{% url 'user:login' %}"><button type="button" class="btn btn-link px-3 me-2">
+              Login
+            </button></a>
+
+          <a href="{% url 'user:singup' %}"><button type="button" class="btn btn-primary me-3">
+              Sign up for free
+            </button></a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+</header>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <!-- Container wrapper -->
+  <div class="container justify-content-center justify-content-md-between">
+    <!-- Left links -->
+    <ul class="navbar-nav flex-row">
+      <li>
+        {% include "products/catogory/category_list.html" %}
+      </li>
+
+      <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+        <a class="nav-link" href="{% url 'chat:chat_list' %}"> </a>
+      </li>
+      <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+        <a class="nav-link" href="{% url 'products:product_list' %}">Buy</a>
+      </li>
+      <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+        <a class="nav-link" href="{% url 'products:post_pyment' %}">Sell</a>
+      </li>
+      <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+        <a class="nav-link" href="{% url 'core:contactus' %}">Contact us</a>
+      </li>
+ 
+
+    </ul>
+
+
+
+  </div>
+
+
+
+</nav>
+<!--Main Navigation-->

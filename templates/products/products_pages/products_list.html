@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<img src="https://statics.olx.in/olxin/banners/hero_bg_in_v3@1x.png" class="img-fluid" style="object-fit: cover; ">
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+
+        <!-- <h1 class="d-flex justify-content-center mb-5">All Ads</h1> -->
+
+        <div class="row">
+
+            {% for product in products reversed %}
+
+
+            <div class="col-md-3">
+                <a style=" color: inherit;" href="{% url 'products:product_details' product.id %}">
+                    <div class="card my-2" style="border:1px solid rgb(149, 143, 143);">
+
+                        <img onclick="" style="  height: 200px;
+                    object-fit: cover; padding: 15px;" src="{{product.image.url}}" alt="...">
+
+
+                        <div class="card-body">
+                            <h4>₹ {{product.price}}</h4>
+                            <h6>{{product.product_name}}</h6>
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-0"></p>
+                                <p class="text-dark mb-0">{{product.created_date}}</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </a>
+
+            </div>
+
+            {% empty %}
+            <div class="justify-content-center">
+                <h5 class="justify-content-center">NOTHING FOUND!!</h5>
+
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+{% endblock %}

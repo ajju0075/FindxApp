@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-md-4">
+                <!-- <a href="#" class="btn btn-dark my-3">Go Back</a> -->
+
+                <div class="card">
+
+
+                    <div class="row justify-content-center">
+                        <h1 class="row justify-content-center">Setup profile</h1>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div>
+                            <div class="d-flex justify-content-center mb-4">
+                                <img height="40vh" src="{{user.profilemodel.photo.url}}" class="rounded-circle" />
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn btn-primary btn-rounded">
+                                    <label class="form-label text-white m-1" for="customFile2">Choose file</label>
+                                    <input type="file" name="photo" class="form-control d-none" id="customFile2" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group m-3">
+                            <label>First name</label>
+                            <input required name="first_name" type="text" placeholder="Enter first name"
+                                class="form-control">
+                        </div>
+
+
+
+                        <div class="form-group m-3">
+                            <label>Last name</label>
+                            <input required name="last_name" type="text" placeholder="Enter last name"
+                                class="form-control">
+                        </div>
+
+
+                        <div class="form-group m-3">
+                            <label>Phone</label>
+                            <input name="phone" type="text" placeholder="Enter your phone" class="form-control">
+                        </div>
+
+                        <div class="form-group m-3">
+                            <label>location</label>
+                            <input name="location" type="text" placeholder="Enter your location" class="form-control">
+                        </div>
+
+
+                        <!-- <div class="form-group m-3">
+                                <label>Upload image</label>
+                                <input required name="image" type="file" class="form-control-file">
+                            </div> -->
+
+                        <button type="submit" class="btn btn-primary m-3">Create</button>
+
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+<!-- <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="btn btn-primary" type="submit" value="Submit">            
+  </form> -->

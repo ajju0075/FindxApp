@@ -1,0 +1,12 @@
+
+    <form  action="{% url 'products:product_search' %}" class="d-flex input-group w-auto my-auto mb-3 mb-md-0">
+        {% csrf_token %}
+        <input name="q" autocomplete="off" type="search" class="form-control rounded" placeholder="Search" />
+        <button type="submit"  class="input-group-text border-0  d-lg-flex" title="search"  ><i class="fas fa-search" ></i></button>
+    </form>
+
+<!-- 
+  <form class="d-flex input-group w-auto my-auto mb-3 mb-md-0">
+    <input autocomplete="off" type="search" class="form-control rounded" placeholder="Search" />
+    <span class="input-group-text border-0 d-none d-lg-flex"><i class="fas fa-search"></i></span>
+  </form> -->
