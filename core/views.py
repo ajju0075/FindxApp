@@ -10,8 +10,11 @@ from django.contrib import messages
 from products import models as products_model
 
 
-class HomeView(views.TemplateView):
+
+class HomeView(views.ListView):
     template_name = "core/home.html"
+    model = products_model.ProductsModel
+    context_object_name = "products"
 
 
 class FeedbackCreateView(views.CreateView):
